@@ -1,0 +1,58 @@
+<?php
+session_start();
+
+include_once 'src/Usuario.php';
+include_once 'src/UsuarioRepositorio.php';
+
+use src\Usuario;
+use src\UsuarioRepositorio;
+
+if(!isset($_SESSION['logou'])|| $_SESSION['logou'] != TRUE){
+    header('Location: index.php');
+}
+else if($_SESSION['nivel'] == 3){
+    header('Location: telaPrincipal.php');
+}
+else{
+    ?>
+ <!doctype html>
+<html>
+<head>
+<title>:SISTEMA:</title>
+<meta charset="UTF-8"/>
+</head>
+<body bgcolor="#E0FFFF"> 
+<?php 
+
+$nome = $_GET['nome'];
+$login = $_GET['login'];
+// $senha = $_GET['senha'];
+$nivel = $_GET['nivel'];
+$idSuperior = $_GET['idSuperior'];
+$id = $_GET['id'];
+
+$Usuario = new Usuario();
+$Usuario->setNome($nome);
+$Usuario->setLogin($login);
+$Usuario->setNivel($nivel);
+$Usuario->setIdSuperior($idSuperior);
+$Usuario->setId($id);
+$UsuarioRepositorio = new UsuarioRepositorio();
+$retorno = $UsuarioRepositorio->alterarUsuario($Usuario);
+
+if($retorno == TRUE){
+    echo "As Informações desse Usuario Forão Alterado com sucesso";
+}
+else {
+    echo "Falha nas Alterações do Usuario";
+}
+
+?> 
+<br/> 
+<a href="telaPrincipal.php">Voltar</a> 
+</body>
+</html>
+
+<?php 
+}
+?>

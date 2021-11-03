@@ -1,0 +1,147 @@
+<?php
+
+use src\Ambiente;
+use src\AmbienteRepositorio;
+use src\SubGrupo;
+use src\SubGrupoRepositorio;
+
+session_start();
+
+include_once 'src/Ambiente.php';
+include_once 'src/AmbienteRepositorio.php';
+include_once 'src/Usuario.php';
+include_once 'src/UsuarioRepositorio.php';
+include_once 'src/SubGrupo.php';
+include_once 'src/SubGrupoRepositorio.php';
+
+if(!isset($_SESSION['logou']) || $_SESSION['logou'] != TRUE){
+    header('Location: index.php');
+}
+else{
+    
+    $Ambiente = new Ambiente();
+    
+    $AmbienteRepositorio = new AmbienteRepositorio();
+    
+    $listaAmbiente =
+    $AmbienteRepositorio->listaAmbintesDesbloqueados();
+    
+    $quant =
+    $AmbienteRepositorio->contarTodosAmbientesDesbloqueado();
+    
+    $Contador = 0;
+    
+    
+    $SubGrupo = new SubGrupo();
+    
+    $SubGrupoRepositorio = new SubGrupoRepositorio();
+    
+    $listaSubGrupo = 
+    $SubGrupoRepositorio->listaSubGruposDesbloqueados();
+    
+    $quant1 =
+    $SubGrupoRepositorio->contarTodosSubGruposDesbloqueado();
+    
+    $contador = 0;
+    
+    
+    ?>
+<?php 
+$nome = $_GET['nome'];
+$data = $_GET['data'];
+$descricao = $_GET['descricao'];
+$iduni = $_GET['idUnidade'];
+$id = $_SESSION['id'];
+$Unidade = new Unidade();
+$Unidade->setId(strip_tags(trim($iduni)));
+$Usuario = new Usuario();
+$Usuario->setId(strip_tags(trim($id)));
+
+$Ambiente = new Ambiente();
+$Ambiente->setNome($nome);
+$Ambiente->setData($data);
+$Ambiente->setDescricao($descricao);
+$Ambiente->setUsuario($Usuario);                                                                                                           
+$Ambiente->setUnidade($Unidade);
+
+$AmbienteRepositorio = new AmbienteRepositorio();
+
+if($Ambiente->getNome() == " "){
+    
+    echo "Digite o nome";
+}
+else{
+    
+    "NOME: ".$Ambiente->getNome();
+    "DATA: ".$Ambiente->getData()."<br/>";
+    "DESCRICAO: ".$Ambiente->getDescricao();
+    "SITUACAO: ".$Unidade->getSituacao();
+   
+    $retorno =
+    $Ambiente = $AmbienteRepositorio->CadastrarAmbiente($Ambiente);
+    if($retorno == TRUE){
+        echo "Cadastro efetuado com sucesso";
+    }
+    else{
+        echo "Erro no Cadastro";
+    }
+}
+
+?>
+<br/> 
+<a href="telaPrincipal.php">Voltar</a>
+<h3>Cadastro do Ativo</h3>    
+<form action="cadastrarAtivo2.php" method="get">
+
+<label>Nome:</label><input type="text" name="nome" maxlength="60"/><br/><br/>
+
+<label>Data Cadastro:</label><input type="text" name="data" maxlength="60"/><br/><br/>
+
+<label>Descricao:</label><input type="text" name="descricao" maxlength="60"/><br/><br/>
+
+<label>Codigo Barra:</label><input type="text" name="codigobarra" maxlength="60"/><br/><br/>
+
+<label>Status do Ativo:</label><select name="idStatus"> 
+<option>Selecione o Status</option>
+<option value="1">EM USO</option>
+<option value="2">MANUTEÇÂO</option>
+<option value="3">BAIXA</option>
+<option value="4">TRANSFERIDO</option>
+</select><br/><br/>
+
+<label>Ambiente:</label><select name="idAmbiente">
+<option>Selecione o Ambiente</option>
+<?php 
+while($Contador < $quant){
+    
+    $Ambiente = $listaAmbiente[$Contador];
+    
+    echo "<option value=".$Ambiente->getId().">".$Ambiente->getNome()."</option>" ;
+    $Contador++;
+}
+?>
+</select><br/><br/>                                                                                
+                                                                                      
+
+<label>SubGrupo:</label><select name="idSubgrupo">
+<option>Selecione o SubGrupo</option> 
+<?php                                                                               
+while($contador < $quant1){                                                          
+                                                                                    
+    $SubGrupo = $listaSubGrupo[$contador];                                            
+                                                                                    
+    echo "<option value='".$SubGrupo->getId()."'>".$SubGrupo->getNome()."</option>" ; 
+    $contador++;                                                                    
+}                                                                                   
+                                                                                    
+?>                                                                                                     
+</select><br/><br/>                                                                 
+<input type="submit" value="Enviar">
+</form> 
+</body>
+</html> 
+  
+<?php  
+}
+?>
+

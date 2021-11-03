@@ -1,0 +1,178 @@
+<?php
+use src\Usuario;
+
+session_start();
+
+if(!isset($_SESSION['logou']) || $_SESSION['logou'] != TRUE){
+    header('Location: index.php');
+    
+}
+else{
+    ?>
+<!doctype html>
+<html>
+<head>
+<title>Sistema</title>
+<meta charset="UTF-8"/>
+</head>
+<body>
+<?php echo($_SESSION['nome']);?> <a href="sairSistema.php">Sair</a>
+
+<?php 
+if($_SESSION['nivel'] == 1){
+?>    
+<a href="cadastrarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Usuario</a>
+<a href="consultarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Usuario</a>
+<a href="alterarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Usuario</a>
+<a href="bloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Usuario</a>
+<a href="desbloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Usuario</a>
+<a href="excluirUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Excluir Usuarios</a>
+<a href="excluirUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Excluir Unidade</a>
+<a href="cadastrarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Unidade</a>
+<a href="consultarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Unidade</a>
+<a href="alterarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Unidade</a>
+<a href="bloquearUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Unidade</a>
+<a href="desbloquearUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Unidade</a>
+<a href="cadastrarCargo.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Cargo</a>
+<a href="consultarCargo.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Cargo</a>
+<a href="alterarCargo.php"><img src="img\quad.jpg" width="9" align="center"> alterar Cargo</a>
+<a href="bloquearCargo.php"><img src="img\quad.jpg" width="9" align="center"> Bloquear Cargo</a>
+<a href="desbloquearCargo.php"><img src="img\quad.jpg" width="9" align="center"> Desbloquear Cargo</a>
+<a href="cadastrarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Funcionario</a>
+<a href="consultarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> consultar Funcionario</a>
+<a href="alterarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> alterar Funcionario</a>
+<a href="bloquearFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Funcionario</a>
+<a href="cadastrarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Grupo</a>
+<a href="consultarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Grupo</a>
+<a href="alterarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> alterar Grupo</a>
+<a href="bloquearGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Bloquear Grupo</a>
+<a href="desbloquearGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Desbloquear Grupo</a>
+<a href="CadastrarAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Ambiente</a>
+<a href="consultarAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Ambiente</a>
+<a href="alterarAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Ambiente</a>
+<a href="bloquearAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Bloquear Ambiente</a>
+<a href="desbloquearAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Desbloquear Ambiente</a>
+<a href="excluirAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Excluir Ambiente</a>
+<a href="listarAmbiente.php"><img src="img\quad.jpg" width="9" align="center"> Listar Ambiente</a>
+<a href="cadastrarSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">Cadastrar SubGrupo</a>
+<a href="consultarSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">Consultar SubGrupo</a>
+<a href="alterarSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">Alterar SubGrupo</a>
+<a href="bloquearSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">Bloquear SubGrupo</a>
+<a href="desbloquearSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">DesBloquear SubGrupo</a>
+<a href="excluirSubgrupo.php"><img src="img\quad.jpg" width="9" align="center">Excluir SubGrupo</a>
+<a href="ListarSubGrupo.php"><img src="img\quad.jpg" width="9" align="center">Lista SubGrupo</a>
+<a href="CadastrarAtivo.php"><img src="img\quad.jpg" width="9" align="center">Cadastrar Ativo</a>
+<a href="ConsultarAtivo.php"><img src="img\quad.jpg" width="9" align="center">Consultar Ativo</a>
+<a href="consultarPorCodigoBarra.php"><img src="img\quad.jpg" width="9" align="center">Consultar Ativo Por Codigo de Barras</a>
+<a href="alterarAtivo.php"><img src="img\quad.jpg" width="9" align="center">Alterar Ativo</a>
+<a href="alterarPorCodigoBarra.php"><img src="img\quad.jpg" width="9" align="center">Alterar Ativo Por Codigo de Barras</a>
+<a href="bloquearativo.php"><img src="img\quad.jpg" width="9" align="center">Bloquear Ativo</a>
+<a href="bloquearPorCodigoBarra.php"><img src="img\quad.jpg" width="9" align="center">Bloquear Ativo Por Codigo de Barras</a>
+<a href="desbloquearativo.php"><img src="img\quad.jpg" width="9" align="center">Desbloquear Ativo</a>
+<a href="desbloquearPorCodigoBarra.php"><img src="img\quad.jpg" width="9" align="center">Desbloquear Ativo Por Codigo de Barras</a>
+
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaUnidade.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todas Unidades</a>
+<a href="listaCargos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Cargos</a>
+<a href="listaTodosGrupo.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Grupo</a>
+<a href="listaTodoAtivo.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Ativos</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaCargosBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Bloqueados</a>
+<a href="listaGrupoBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Grupo Bloqueados</a>
+<a href="listaUnidadesBloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Bloqueados</a>
+<a href="listaAtivoBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Ativos Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaUnidadesDesbloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Desbloqueados</a>
+<a href="listaCargosDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Desbloqueados</a>
+<a href="listaGrupoDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Grupos Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+}
+?>
+<?php 
+if($_SESSION['nivel'] == 2){
+?>
+<a href="cadastrarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Usuario</a>
+<a href="consultarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Usuario</a>
+<a href="alterarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Usuario</a>
+<a href="bloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Usuario</a>
+<a href="desbloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Usuario</a>
+<a href="excluirUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Excluir Usuarios</a>
+<a href="cadastrarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Unidade</a>
+<a href="consultarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Unidade</a>
+<a href="alterarUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Unidade</a>
+<a href="bloquearUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Unidade</a>
+<a href="desbloquearUnidade.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Unidade</a>
+<a href="cadastrarCargo.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Cargo</a>
+<a href="consultarCargo.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Cargo</a>
+<a href="alterarCargo.php"><img src="img\quad.jpg" width="9" align="center"> alterar Cargo</a>
+<a href="bloquearCargo.php"><img src="img\quad.jpg" width="9" align="center"> Bloquear Cargo</a>
+<a href="desbloquearCargo.php"><img src="img\quad.jpg" width="9" align="center"> Desbloquear Cargo</a>
+<a href="cadastrarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Funcionario</a>
+<a href="consultarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> consultar Funcionario</a>
+<a href="alterarFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> alterar Funcionario</a>
+<a href="bloquearFuncionario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Funcionario</a>
+<a href="cadastrarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Grupo</a>
+<a href="consultarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Grupo</a>
+<a href="alterarGrupo.php"><img src="img\quad.jpg" width="9" align="center"> alterar Grupo</a>
+<a href="bloquearGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Bloquear Grupo</a>
+<a href="desbloquearGrupo.php"><img src="img\quad.jpg" width="9" align="center"> Desbloquear Grupo</a>
+
+
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaUnidade.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todas Unidades</a>
+<a href="listaCargos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Cargos</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaCargosBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Bloqueados</a>
+<a href="listaUnidadesBloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaUnidadesDesbloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Desbloqueados</a>
+<a href="listaCargosDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+}
+?>
+<?php 
+if($_SESSION['nivel'] == 3){
+?>
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaUnidade.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todas Unidades</a>
+<a href="listaCargos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Cargos</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaCargosBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Bloqueados</a>
+<a href="listaUnidadesBloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaUnidadesDesbloqueadas.php"><img src="img\quad.jpg" width="9" align="center">  Lista Unidades Desbloqueados</a>
+<a href="listaCargosDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Cargos Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+
+}
+?>
+
+</body>
+</html> 
+  
+<?php  
+}
+?>

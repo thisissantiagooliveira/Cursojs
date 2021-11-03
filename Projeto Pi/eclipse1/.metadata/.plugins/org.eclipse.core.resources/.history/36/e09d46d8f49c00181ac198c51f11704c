@@ -1,0 +1,27 @@
+<?php
+//verificar se o usuario j� esta logado
+
+?>
+<!-- style="color:#B0C4DE;" -->
+<!doctype html>
+<html>
+<head>
+<title>:SISTEMA:</title>
+<meta charset="UTF-8"/>
+</head>
+<body bgcolor="#E0FFFF">
+<form action="validarLogin.php" method="post">
+<h2>BEM-VINDO AO NOSSO SISTEMA</h2>
+<h3>ACESSO AO SISTEMA</h3>
+<label>Login:</label>
+<input type="text" name="login" maxlength="10"/><br/><br/>
+<label>Senha:</label>
+<input type="password" name="senha" maxlength="10"/><br/><br/>
+<input type="submit" value="Enviar"/>
+
+
+
+</form>
+
+</body>
+</html>

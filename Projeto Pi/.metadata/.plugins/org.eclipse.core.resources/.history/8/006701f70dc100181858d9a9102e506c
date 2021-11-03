@@ -1,0 +1,208 @@
+
+<?php
+
+use src\Ambiente;
+use src\AmbienteRepositorio;
+use src\AtivoRepositorio;
+use src\Ativo;
+
+session_start();
+
+include_once 'src/Ambiente.php';
+include_once 'src/AmbienteRepositorio.php';
+include_once 'src/Ativo.php';
+include_once 'src/AtivoRepositorio.php';
+
+if(!isset($_SESSION['logou']) || $_SESSION['logou'] != TRUE){
+    header('Location: index.php');
+}
+else{
+    
+    $Ambiente = new Ambiente();
+    
+    $AmbienteRepositorio = new AmbienteRepositorio();
+    
+    $listaAmbiente =
+    $AmbienteRepositorio->listaAmbientesDesbloqueados();
+    
+    $quant =
+    $AmbienteRepositorio->contarTodosAmbientesDesbloqueado();
+    
+    $contador = 0;
+    
+    $Ambiente = new Ambiente();
+    
+    $AmbienteRepositorio = new AmbienteRepositorio();
+    
+    $listaAmbiente1 =
+    $AmbienteRepositorio->listaAmbientesDesbloqueados();
+    
+    $quant2 =
+    $AmbienteRepositorio->contarTodosAmbientesDesbloqueado();
+    
+    $Contador = 0;
+    
+
+    $Ativo = new Ativo();
+    
+    $AtivoRepositorio = new AtivoRepositorio();
+    
+    $listaAtivo =
+    $AtivoRepositorio->listarAtivoDesbloqueados();
+    
+    $quant1 =
+    $AtivoRepositorio->contarTodosAtivosDesbloqueado();
+    
+    $contador1 = 0;
+    
+    
+    ?>
+<!doctype html>
+<html>
+<head>
+<title>Sistema</title>
+<meta charset="UTF-8"/>
+</head>
+<body>
+<?php echo($_SESSION['nome']);?> <a href="sairSistema.php">Sair</a>
+
+<?php 
+if($_SESSION['nivel'] == 1){
+?>    
+<a href="cadastrarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Usuario</a>
+<a href="consultarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Usuario</a>
+<a href="alterarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Usuario</a>
+<a href="bloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Usuario</a>
+<a href="desbloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Usuario</a>
+<a href="excluirUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Excluir Usuarios</a>
+
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+}
+?>
+<?php 
+if($_SESSION['nivel'] == 2){
+?>
+<a href="cadastrarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Cadastrar Usuario</a>
+<a href="consultarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Consultar Usuario</a>
+<a href="alterarUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Alterar Usuario</a>
+<a href="bloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Bloqueio de Usuario</a>
+<a href="desbloquearUsuario.php"><img src="img\quad.jpg" width="9" align="center"> Desbloqueio de Usuario</a>
+
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+}
+?>
+<?php 
+if($_SESSION['nivel'] == 3){
+?>
+<span style="color:#FF6E06; padding-left:30px; font-size:18px;">Relatorios</span>
+	
+<a href="listaTodos.php"><img src="img\quad.jpg" width="9" align="center">  Lista Todos Usuarios</a>
+<a href="listaBloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Bloqueados</a>
+<a href="listaDesbloqueados.php"><img src="img\quad.jpg" width="9" align="center">  Lista Desbloqueados</a>
+<a href="listaPorNivel.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Nivel</a>
+<a href="listaPorSuperior.php"><img src="img\quad.jpg" width="9" align="center">  Lista Por Superior</a>
+<a href="alterarSenha.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Senha</a>
+<a href="alterarPerfil.php"><img src="img\quad.jpg" width="9" align="center">  Alterar Perfil</a>
+
+<?php 
+
+}
+?>
+
+
+<h3>Cadastro de Movimentação</h3>   
+
+<form action="cadastrarMovimentacao2.php" method="get">
+
+<label>Motivo:</label><input type="text" name="motivo" maxlength="60"/><br/><br/>
+
+<label>Data de Cadastro:</label><input type="text" name="datacad" maxlength="60"/><br/><br/>
+
+<label>Data de Entrada:</label><input type="text" name="dataentrada" maxlength="60"/><br/><br/>
+
+<label>Data de Saida:</label><input type="text" name="datasaida" maxlength="60"/><br/><br/>
+
+<label>Descricao:</label><input type="text" name="descricao" maxlength="60"/><br/><br/>
+
+<label>Status:</label><select name="status"> 
+<option>Selecione o Status</option>
+<option value="1">Em Uso</option>
+<option value="2">Manutencao</option>
+<option value="3">Baixa</option>
+<option value="4">Transferencia</option>
+<option value="5">Doação</option>
+<option value="6">Devolução</option>
+</select><br/><br/>
+
+<label>Ambiente Origem:</label><select name="idAmbienteraiz">
+<option>Selecione o Ambiente</option>
+<?php 
+while($Contador < $quant2){
+    
+    $Ambiente = $listaAmbiente1[$Contador];
+    
+    echo "<option value=".$Ambiente->getId().">".$Ambiente->getNome()."</option>" ;
+    $Contador++;
+}
+?>
+
+</select><br/><br/>
+
+<label>Ambiente Destino:</label><select name="idAmbiente">
+<option>Selecione o Ambiente</option>
+<?php 
+while($contador < $quant){
+    
+    $Ambiente = $listaAmbiente[$contador];
+    
+    echo "<option value=".$Ambiente->getId().">".$Ambiente->getNome()."</option>" ;
+    $contador++;
+}
+?>
+
+</select><br/><br/>
+
+
+<label>Ativo</label><select name="idAtivo">
+<option>Selecione o Ativo</option>
+<?php 
+while($contador1 < $quant1){
+    
+    $Ativo = $listaAtivo[$contador1];
+    
+    echo "<option value=".$Ativo->getId().">".$Ativo->getNome()."</option>" ;
+    $contador1++;
+}
+?>
+
+</select><br/><br/>                                                                 
+<input type="submit" value="Enviar">
+</form> 
+</body>
+</html> 
+  
+<?php  
+}
+?>

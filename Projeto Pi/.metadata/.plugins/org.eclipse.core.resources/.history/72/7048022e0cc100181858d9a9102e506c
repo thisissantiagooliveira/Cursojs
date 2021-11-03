@@ -1,0 +1,134 @@
+<?php
+session_start();
+
+include_once 'src/Ativo.php';
+include_once 'src/AtivoRepositorio.php';
+include_once 'src/Usuario.php';
+include_once 'src/UsuarioRepositorio.php';
+include_once 'src/Ambiente.php';
+include_once 'src/AmbienteRepositorio.php';
+include_once 'src/SubGrupo.php';
+include_once 'src/SubGrupoRepositorio.php';
+
+use src\Ativo;
+use src\AtivoRepositorio;
+use src\Usuario;
+use src\UsuarioRepositorio;
+use src\Ambiente;
+use src\AmbienteRepositorio;
+use src\SubGrupo;
+use src\SubGrupoRepositorio;
+
+if(!isset($_SESSION['logou']) || $_SESSION['logou'] != TRUE){
+    header('Location: index.php');
+}
+else if ($_SESSION['nivel']==3){
+    header('Location: telaPrincipal.php');
+}
+else{
+    ?>
+<?php 
+$nome = $_GET['nome'];
+$data = $_GET['data'];
+$descricao = $_GET['descricao'];
+$iduni = $_GET['idUnidade'];
+$id = $_SESSION['id'];
+$Unidade = new Unidade();
+$Unidade->setId(strip_tags(trim($iduni)));
+$Usuario = new Usuario();
+$Usuario->setId(strip_tags(trim($id)));
+
+$Ambiente = new Ambiente();
+$Ambiente->setNome($nome);
+$Ambiente->setData($data);
+$Ambiente->setDescricao($descricao);
+$Ambiente->setUsuario($Usuario);                                                                                                           
+$Ambiente->setUnidade($Unidade);
+
+$AmbienteRepositorio = new AmbienteRepositorio();
+
+if($Ambiente->getNome() == " "){
+    
+    echo "Digite o nome";
+}
+else{
+    
+    "NOME: ".$Ambiente->getNome();
+    "DATA: ".$Ambiente->getData()."<br/>";
+    "DESCRICAO: ".$Ambiente->getDescricao();
+    "SITUACAO: ".$Unidade->getSituacao();
+   
+    $retorno =
+    $Ambiente = $AmbienteRepositorio->CadastrarAmbiente($Ambiente);
+    if($retorno == TRUE){
+        echo "Cadastro efetuado com sucesso";
+    }
+    else{
+        echo "Erro no Cadastro";
+    }
+}
+
+?>
+<br/> 
+<a href="telaPrincipal.php">Voltar</a>
+    <?php 
+
+$nome = $_GET['nome'];
+$data = $_GET['data'];
+$descricao = $_GET['descricao'];
+$codigobarra = $_GET['codigobarra'];
+$idStatus = $_GET['idStatus'];
+$idAmbiente = $_GET['idAmbiente'];
+$idSubgrupo = $_GET['idSubgrupo'];
+$id = $_SESSION['id'];
+
+
+$Usuario = new Usuario();
+$Usuario->setId(strip_tags(trim($id)));
+
+$Ambiente = new Ambiente();
+$Ambiente->setId(strip_tags(trim($idAmbiente)));
+
+$SubGrupo = new SubGrupo();
+$SubGrupo->setId(strip_tags(trim($idSubgrupo)));
+
+$Ativo = new Ativo();
+$Ativo->setNome($nome);
+$Ativo->setData($data);
+$Ativo->setUsuario($Usuario);
+$Ativo->setAmbiente($Ambiente);
+$Ativo->setSubGrupo($SubGrupo);
+$Ativo->setDescricao($descricao);
+$Ativo->setStatus($idStatus);
+$Ativo->setCodigobarra($codigobarra);
+
+$AtivoRepositorio = new AtivoRepositorio();
+$Existe = $AtivoRepositorio->existeAtivo($Ativo);
+
+if($Existe != TRUE){
+   
+    $retorno = $AtivoRepositorio->cadastrarAtivo($Ativo);
+    if($retorno == TRUE){
+        echo "Ativo cadastrado com sucesso";
+    }
+    else {
+        echo "Falha no cadastro do Ativo";
+    }
+
+}
+
+else{
+    
+    echo "CODIGOS DE BARRAS já existente, Tente novamente com um CODIGO DE BARRAS diferente";  
+
+}
+?> 
+<br/> 
+<a href="telaPrincipal.php">Voltar</a>     
+</body>
+</html> 
+  
+<?php  
+}
+?>
+    
